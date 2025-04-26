@@ -1,39 +1,29 @@
-// playwright.config.js
 module.exports = {
   testDir: './tests',
-  timeout: 30000, // глобальный таймаут
+  timeout: 30000, // глобальный таймаут для каждого теста
   expect: {
-    timeout: 5000, // таймаут для ожидания
+    timeout: 5000, // таймаут для ожидания элементов
   },
   use: {
-    headless: true,
-    browserName: 'chromium',
-    baseURL: 'https://example.com',
+    headless: true, // запускать в headless-режиме
+    browserName: 'chromium', // запускать только Chromium
+    baseURL: 'https://example.com', // основной URL для тестов
     video: 'on-first-retry', // записывать видео только при первом провале
     screenshot: 'on-failure', // делать скриншоты при провале теста
   },
   projects: [
     {
-      name: 'chromium',
+      name: 'chromium', // используем только Chromium
       use: { browserName: 'chromium' },
-    },
-    {
-      name: 'firefox',
-      use: { browserName: 'firefox' },
-    },
-    {
-      name: 'webkit',
-      use: { browserName: 'webkit' },
-    },
+    }
   ],
   reporter: [
     ['html', { outputFolder: 'test-results', open: 'never' }],
     ['json', { outputFile: 'test-results/results.json' }],
   ],
-  workers: process.env.CI ? 4 : 1,
-  retries: 2,
-  globalSetup: require.resolve('./global-setup'),
-  globalTeardown: require.resolve('./global-teardown'),
+  workers: 1, // запускать тесты по одному, без параллелизма
+  retries: 0, // не повторять тесты при их неудаче
 };
+
 
 
