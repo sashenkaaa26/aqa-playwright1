@@ -25,5 +25,5 @@ class LoginPage {
   }
 }
 
-module.exports = { LoginPage };
+export { LoginPage };
 

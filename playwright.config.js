@@ -26,20 +26,42 @@
 // };
 
 
-// playwright.config.js
-module.exports = {
+// require('dotenv').config();  
+
+// console.log("Base URL: ", process.env.BASE_URL);
+// console.log("Username: ", process.env.USERNAME);
+// console.log("Password: ", process.env.PASSWORD);
+
+
+// export const testDir = './tests';
+// export const timeout = 30000;
+// export const use = {
+//   headless: false, 
+//   browserName: 'chromium',
+//   baseURL: process.env.BASE_URL, 
+//   video: 'on-first-retry',
+//   screenshot: 'on-failure',
+//   httpCredentials: {
+//     username: process.env.USERNAME, 
+//     password: process.env.PASSWORD, 
+//   }
+// };
+
+import { config } from 'dotenv';
+config();  // Загружаем переменные окружения
+
+export default {
   testDir: './tests',
   timeout: 30000,
   use: {
     headless: false,
     browserName: 'chromium',
-    baseURL: 'https://qauto.forstudy.space/',
+    baseURL: process.env.BASE_URL,
     video: 'on-first-retry',
     screenshot: 'on-failure',
     httpCredentials: {
-      username: 'guest',
-      password: 'welcome2qauto',
+      username: process.env.USERNAME,
+      password: process.env.PASSWORD,
     }
   },
 };
-
