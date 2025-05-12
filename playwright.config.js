@@ -46,22 +46,35 @@
 //     password: process.env.PASSWORD, 
 //   }
 // };
+// import dotenv from 'dotenv';  // Импортируем dotenv
+// import { defineConfig } from '@playwright/test';  // Для использования с ES6 модулями
 
-import { config } from 'dotenv';
-config();  // Загружаем переменные окружения
+// dotenv.config();  // Загружаем переменные окружения
 
+// export default defineConfig({
+//   testDir: './tests',  // Указываем директорию с тестами
+//   timeout: 30000,  // Таймаут для тестов
+
+//   use: {
+//     headless: false,  // Отключаем headless-режим (если нужно, можно включить)
+//     browserName: 'chromium',  // Используем Chromium для тестов
+//     baseURL: process.env.BASE_URL,  // Динамический baseURL из переменных окружения
+//     video: 'on-first-retry',  // Записываем видео только при первом неудачном тесте
+//     screenshot: 'on-failure',  // Делаем скриншот только при сбое
+//     storageState: 'state.json',  // Указываем путь к сохраненному состоянию
+//     httpCredentials: {
+//       username: 'guest',  // HTTP Basic Auth - имя пользователя
+//       password: 'welcome2qauto',  // HTTP Basic Auth - пароль
+//     },
+//   },
+
+//   globalSetup: './global-setup.js',  // Указываем путь к файлу глобальной настройки
+// });
+// playwright.config.js
 export default {
-  testDir: './tests',
-  timeout: 30000,
   use: {
+    baseURL: 'https://qauto.forstudy.space',
     headless: false,
-    browserName: 'chromium',
-    baseURL: process.env.BASE_URL,
-    video: 'on-first-retry',
-    screenshot: 'on-failure',
-    httpCredentials: {
-      username: process.env.USERNAME,
-      password: process.env.PASSWORD,
-    }
   },
+  globalSetup: './setup.js', // ← строка с путем к файлу
 };
